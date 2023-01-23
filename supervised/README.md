@@ -19,4 +19,6 @@ In this experiment I used the Airbnb US 2020 data that includes teh following co
 * availability_365
 * city
 <br>
-![Scatter Plot](https://github.com/Samimnif/Machine-Learning/blob/master/supervised/img/Figure_1.png)
+![Scatter Plot](/img/Figure_1.png)
+
+![HeatMap](/img/Figure_2.png)
