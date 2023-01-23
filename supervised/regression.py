@@ -10,6 +10,7 @@ import numpy as np
 import seaborn as sns
 
 rbnb = pd.read_csv("AB_US_2020.csv", low_memory=False)
+
 numeric_col = ['price']
 for x in ['price']:
     q75, q25 = np.percentile(rbnb.loc[:, x], [75, 25])
@@ -88,5 +89,8 @@ plt.xlabel(bestColumn.replace("_", " "))
 plt.ylabel("Price")
 plt.show()
 
-sns.heatmap(airbnbX.corr(), annot=True)
+boxplot = rbnb.boxplot(column=["minimum_nights", "number_of_reviews", "reviews_per_month", "availability_365", "calculated_host_listings_count"], showfliers=False)
+plt.show()
+
+sns.heatmap(rbnb.corr(), annot=True)
 plt.show()
