@@ -16,8 +16,8 @@ The objective of this experiment is to find the best model that predicts the pri
 | neighbourhood_group | minimum_nights    | city                           |
 | neighbourhood       | number_of_reviews |                                |
 
-* Boxplot of the cleaned data (free of extreme outliers) 
-<br>
+* Boxplot of the cleaned data (free of extreme outliers)
+
 ![HeatMap](img/Figure_2.png)
 <br>
 * Using the heatmap figure below, we can find the correlation between the features and the target variable "price"
@@ -64,7 +64,6 @@ Function:  0.16491070972386887  * x + 129.00213300445
 ```
 * From the previous step we confirmed that the **"Calculated Host Listings Count"** appears as the best feature for the 
 **price** variable and with this combination we would get an accurate prediction.
-<br>
 ## Classification
 
 ### Objective
