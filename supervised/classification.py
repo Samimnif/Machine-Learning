@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = pd.read_csv("winequality-red.csv")
+data = pd.read_csv("winequality-white.csv")
 
 encoder = LabelEncoder()
 data["quality"] = encoder.fit_transform(data["quality"])
@@ -28,16 +28,22 @@ accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 
 conf_matrix = confusion_matrix(y_test, y_pred)
-print("Confusion matric:\n", conf_matrix)
+print("Confusion matrix:\n", conf_matrix)
 
-sns.heatmap(conf_matrix, annot=True, fmt='d', cmap="YlGnBu") #, cmap="Y1GnBu"
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap="YlGnBu")
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.show()
+
+colors = {0:'red', 1:'blue', 2:'green', 3:'yellow',4:'purple',5:'cyan',6:'brown',7:'black',8:'orange',9:'grey',10:'magenta'}
+plt.scatter(y_test,y_pred,c=y_test.apply(lambda x: colors[x]))
 plt.xlabel("Predicted")
 plt.ylabel("True")
 plt.show()
 
 plt.scatter(y_test, y_pred)
 plt.xlabel("True Values")
-plt.ylabel("predictions")
+plt.ylabel("Predictions")
 plt.show()
 
 sns.boxplot(data=X)
