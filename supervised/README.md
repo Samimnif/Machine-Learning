@@ -1,24 +1,18 @@
 # Supervised Learning
 ## Regression
 In this experiment I used the Airbnb US 2020 data that includes teh following columns:
-* id
-* name
-* host_id
-* host_name
-* neighbourhood_group
-* neighbourhood
-* latitude
-* longitude
-* room_type
-* price
-* minimum_nights
-* number_of_reviews
-* last_review
-* reviews_per_month
-* calculated_host_listings_count
-* availability_365
-* city
 <br>
+
+|                     |                   |                                |
+|---------------------|-------------------|--------------------------------|
+| id                  | latitude          | last_review                    |
+| name                | longitude         | reviews_per_month              |
+| host_id             | room_type         | calculated_host_listings_count |
+| host_name           | price             | availability_365               |
+| neighbourhood_group | minimum_nights    | city                           |
+| neighbourhood       | number_of_reviews |                                |
+
 ![ScatterPlot](img/Figure_1.png)
 <br>
 ![HeatMap](img/Figure_2.png)
+
