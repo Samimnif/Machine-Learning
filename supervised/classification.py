@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -7,13 +9,17 @@ from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = pd.read_csv("winequality-white.csv")
+data = pd.read_csv("winequality-red.csv")
 
 encoder = LabelEncoder()
 data["quality"] = encoder.fit_transform(data["quality"])
 
 X = data[["fixedacidity","volatileacidity","citricacid","residualsugar","chlorides","freesulfurdioxide","totalsulfurdioxide","density","pH","sulphates","alcohol"]]
 y = data["quality"]
+
+z = np.abs(stats.zscore(X))
+X= X[(z < 3).all(axis=1)]
+y = y[(z < 3).all(axis=1)]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
