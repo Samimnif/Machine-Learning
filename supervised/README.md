@@ -68,7 +68,7 @@ Function:  0.16491070972386887  * x + 129.00213300445
 
 ### Objective
 ![HeatMap](img/Classification-Figure_1.png)
-![HeatMap](img/Classification-Figure_2.png)
+![HeatMap](img/Classification-Figure_5.png)
 ![HeatMap](img/Classification-Figure_3.png)
 ![HeatMap](img/Classification-Figure_4.png)
 
