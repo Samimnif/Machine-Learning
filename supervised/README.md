@@ -19,5 +19,6 @@ In this experiment I used the Airbnb US 2020 data that includes teh following co
 * availability_365
 * city
 <br>
-![ScatterPlot](/img/Figure_1.png)
-![HeatMap](/img/Figure_2.png)
+![ScatterPlot](img/Figure_1.png)
+<br>
+![HeatMap](img/Figure_2.png)
