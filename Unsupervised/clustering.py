@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 df = pd.read_csv('winequality-white.csv')
 
 # Select the features and target
-X = df.iloc[:, :6].values
+X = df.iloc[:, :10].values
 y = df.iloc[:, -1].values
 
 # Perform PCA to visualize the data in 2D
