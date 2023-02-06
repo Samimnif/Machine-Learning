@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 from scipy.stats import multivariate_normal
 
 # Load the data
-data = pd.read_csv("data.csv")
+data = pd.read_csv("winequality-white.csv")
 
 # Extract the features and target to be used in the clustering algorithm
 features = data.iloc[:, [2, 3, 4, 5]].values
