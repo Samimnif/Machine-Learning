@@ -52,4 +52,9 @@ plt.figure(figsize=(20, 12))
 for i, col in enumerate(df_features.columns):
     plt.subplot(5, 2, i+1)
     plt.hist(df_features[col], color='blue', alpha=0.5, label='Before Outlier Removal')
-    plt.hist(df_features_no_outliers[col], color='red',
+    plt.hist(df_features_no_outliers[col], color='red', alpha=0.5, label='After Outlier Removal')
+    plt.legend()
+    plt.title(col)
+plt.tight_layout()
+plt.show()
+
