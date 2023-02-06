@@ -8,6 +8,13 @@ from scipy import stats
 # Load the Daily Delhi Climate Train dataset
 df = pd.read_csv('DailyDelhiClimateTrain.csv')
 
+# Convert any string columns to numeric
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# Fill missing values with the mean value of the column
+df.fillna(df.mean(), inplace=True)
+
+
 # Select the features and target
 X = df.iloc[:, :5].values
 
