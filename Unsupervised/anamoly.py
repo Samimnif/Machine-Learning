@@ -2,57 +2,45 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy import stats
 
-# load the data
+# Load the dataset
 df = pd.read_csv('DailyDelhiClimateTrain.csv')
 
-# drop the date column
-df = df.drop('date', axis=1)
+# Convert date to datetime format
+df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
 
-# convert the data into a numpy array
-X = df.values
+# Drop the date column as it is not needed for unsupervised anamoly detection
+df.drop('date', axis=1, inplace=True)
 
-# remove outliers using Z-score
-z = np.abs(stats.zscore(X))
-X = X[(z < 3).all(axis=1)]
+# Remove outliers
+df = df[(np.abs(df - df.mean()) < (3 * df.std())).all(axis=1)]
 
-# check if there are any data points left after removing outliers
-if X.shape[0] == 0:
+# Check if there are any data points left after removing outliers
+if df.shape[0] == 0:
     print("No data points left after removing outliers")
-else:
-    # calculate the covariance matrix
-    covariance_matrix = np.cov(X.T)
+    exit()
 
-    # eigendecomposition of the covariance matrix
-    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)
+# Plot histograms for each feature
+df.hist(bins=10, figsize=(10,10))
+plt.show()
 
-    # calculate Mahalanobis distance
-    mahalanobis_distance = X.dot(np.linalg.inv(covariance_matrix)).dot((X - np.mean(X, axis=0)).T)
-    mahalanobis_distance = np.diag(mahalanobis_distance)
+# Plot heatmap
+sns.heatmap(df.corr(), annot=True)
+plt.show()
 
-    # plot the histogram of the Mahalanobis distance
-    plt.hist(mahalanobis_distance, bins=100)
-    plt.title("Histogram of Mahalanobis Distance")
-    plt.xlabel("Mahalanobis Distance")
-    plt.ylabel("Frequency")
-    plt.show()
+# Plot scatter plots for each feature against every other feature
+sns.pairplot(df, diag_kind='kde')
+plt.show()
 
-    # plot the scatter plot of the data
-    sns.scatterplot(df.index, mahalanobis_distance)
-    plt.title("Scatter Plot of Mahalanobis Distance")
-    plt.xlabel("Data Point Index")
-    plt.ylabel("Mahalanobis Distance")
-    plt.show()
+# Fit a Gaussian mixture model
+from sklearn.mixture import GaussianMixture
+gmm = GaussianMixture(n_components=3)
+gmm.fit(df)
 
-    # plot the Gaussian plot of the Mahalanobis distance
-    sns.distplot(mahalanobis_distance, fit=stats.norm, kde=False)
-    plt.title("Gaussian Plot of Mahalanobis Distance")
-    plt.xlabel("Mahalanobis Distance")
-    plt.ylabel("Frequency")
-    plt.show()
+# Predict the cluster for each data point
+labels = gmm.predict(df)
+df['labels'] = labels
 
-    # plot the heatmap of the covariance matrix
-    sns.heatmap(covariance_matrix, cmap="coolwarm")
-    plt.title("Heatmap of Covariance Matrix")
-    plt.show()
+# Plot the Gaussian mixture model
+sns.scatterplot(x=df['meantemp'], y=df['humidity'], hue=df['labels'], palette='viridis')
+plt.show()
