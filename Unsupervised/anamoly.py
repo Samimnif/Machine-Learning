@@ -2,51 +2,57 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.ensemble import IsolationForest
 from scipy import stats
 
-# Load the dataset
+# load the data
 df = pd.read_csv('DailyDelhiClimateTrain.csv')
 
-# Convert any string columns to numeric
-df = df.apply(pd.to_numeric, errors='coerce')
+# drop the date column
+df = df.drop('date', axis=1)
 
-# Fill missing values with the mean value of the column
-df.fillna(df.mean(), inplace=True)
-
-# Remove outliers using Z-score
+# convert the data into a numpy array
 X = df.values
+
+# remove outliers using Z-score
 z = np.abs(stats.zscore(X))
 X = X[(z < 3).all(axis=1)]
 
+# check if there are any data points left after removing outliers
 if X.shape[0] == 0:
-    print("No data points left after removing outliers.")
+    print("No data points left after removing outliers")
 else:
-    # Fit Isolation Forest on the data
-    isolation_forest = IsolationForest(contamination=0.1)
-    isolation_forest.fit(X)
+    # calculate the covariance matrix
+    covariance_matrix = np.cov(X.T)
 
-    # Predict the anomaly score for each datapoint
-    y_pred = isolation_forest.decision_function(X)
-    y_pred = pd.Series(y_pred, name='Anomaly Score')
+    # eigendecomposition of the covariance matrix
+    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)
 
-    # Plot the Gaussian Mixture Model (GMM)
-    g = sns.jointplot(x=X[:, 0], y=X[:, 1], kind='kde')
+    # calculate Mahalanobis distance
+    mahalanobis_distance = X.dot(np.linalg.inv(covariance_matrix)).dot((X - np.mean(X, axis=0)).T)
+    mahalanobis_distance = np.diag(mahalanobis_distance)
 
-    # Plot the scatter plot of the dataset with different colors for anomalies and inliers
-    plt.scatter(X[y_pred > 0, 0], X[y_pred > 0, 1], s=100, c='blue', label='Inliers')
-    plt.scatter(X[y_pred < 0, 0], X[y_pred < 0, 1], s=100, c='red', label='Anomalies')
-    plt.title('Anomaly detection in Daily Delhi Climate Train data')
-    plt.xlabel('Feature 1')
-    plt.ylabel('Feature 2')
-    plt.legend()
+    # plot the histogram of the Mahalanobis distance
+    plt.hist(mahalanobis_distance, bins=100)
+    plt.title("Histogram of Mahalanobis Distance")
+    plt.xlabel("Mahalanobis Distance")
+    plt.ylabel("Frequency")
     plt.show()
 
-    # Plot the histogram for each feature
-    df.hist(bins=20, figsize=(10, 10))
+    # plot the scatter plot of the data
+    sns.scatterplot(df.index, mahalanobis_distance)
+    plt.title("Scatter Plot of Mahalanobis Distance")
+    plt.xlabel("Data Point Index")
+    plt.ylabel("Mahalanobis Distance")
     plt.show()
 
-    # Plot the heatmap of the correlation matrix
-    plt.figure(figsize=(10, 10))
-    sns.heatmap(df.corr(), annot=True)
+    # plot the Gaussian plot of the Mahalanobis distance
+    sns.distplot(mahalanobis_distance, fit=stats.norm, kde=False)
+    plt.title("Gaussian Plot of Mahalanobis Distance")
+    plt.xlabel("Mahalanobis Distance")
+    plt.ylabel("Frequency")
+    plt.show()
+
+    # plot the heatmap of the covariance matrix
+    sns.heatmap(covariance_matrix, cmap="coolwarm")
+    plt.title("Heatmap of Covariance Matrix")
     plt.show()
