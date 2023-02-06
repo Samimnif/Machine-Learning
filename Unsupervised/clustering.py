@@ -10,7 +10,7 @@ from scipy import stats
 df = pd.read_csv('winequality-white.csv')
 
 # Select the features and target
-X = df.iloc[:, :6].values
+X = df.iloc[:, :10].values
 y = df.iloc[:, -1].values
 
 # Remove outliers using Z-score
@@ -45,11 +45,11 @@ sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
 plt.show()
 
 # Plot histograms of the features before and after removing outliers
-df_features = df.iloc[:, :6]
+df_features = df.iloc[:, :10]
 df_features_no_outliers = pd.DataFrame(X, columns=df_features.columns)
 
 plt.figure(figsize=(20, 12))
 for i, col in enumerate(df_features.columns):
-    plt.subplot(3, 2, i+1)
+    plt.subplot(5, 2, i+1)
     plt.hist(df_features[col], color='blue', alpha=0.5, label='Before Outlier Removal')
-    pl
+    plt.hist(df_features_no_outliers[col], color='red',
