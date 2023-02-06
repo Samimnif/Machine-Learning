@@ -4,13 +4,19 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from scipy import stats
 
 # Load the wine quality dataset
 df = pd.read_csv('winequality-white.csv')
 
 # Select the features and target
-X = df.iloc[:, :10].values
+X = df.iloc[:, :6].values
 y = df.iloc[:, -1].values
+
+# Remove outliers using Z-score
+z = np.abs(stats.zscore(X))
+X = X[(z < 3).all(axis=1)]
+y = y[(z < 3).all(axis=1)]
 
 # Perform PCA to visualize the data in 2D
 pca = PCA(n_components=2)
@@ -37,3 +43,13 @@ plt.show()
 plt.figure(figsize=(12, 6))
 sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
 plt.show()
+
+# Plot histograms of the features before and after removing outliers
+df_features = df.iloc[:, :6]
+df_features_no_outliers = pd.DataFrame(X, columns=df_features.columns)
+
+plt.figure(figsize=(20, 12))
+for i, col in enumerate(df_features.columns):
+    plt.subplot(3, 2, i+1)
+    plt.hist(df_features[col], color='blue', alpha=0.5, label='Before Outlier Removal')
+    pl
