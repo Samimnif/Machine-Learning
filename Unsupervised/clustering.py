@@ -9,15 +9,15 @@ from scipy.stats import multivariate_normal
 data = pd.read_csv("winequality-white.csv")
 
 # Extract the features and target to be used in the clustering algorithm
-features = data.iloc[:, [2, 3, 4, 5]].values
-target = data.iloc[:, 6].values
+features = data.iloc[:, [0, 1, 2, 3, 4, 5]].values
+target = data.iloc[:, 11].values
 
 # Fit the K-Means algorithm to the data
-kmeans = KMeans(n_clusters = 3, init = 'k-means++', random_state = 0)
+kmeans = KMeans(n_clusters = 6, init = 'k-means++', random_state = 0)
 y_kmeans = kmeans.fit_predict(features)
 
 # Plot the Gaussian distributions for each cluster
-for i in range(3):
+for i in range(6):
     mean = kmeans.cluster_centers_[i,:]
     cov = np.cov(features[y_kmeans == i].T)
     x, y = np.mgrid[mean[0]-2:mean[0]+2:.1, mean[1]-2:mean[1]+2:.1]
