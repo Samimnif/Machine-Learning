@@ -43,4 +43,5 @@ df['labels'] = labels
 
 # Plot the Gaussian mixture model
 sns.scatterplot(x=df['meantemp'], y=df['humidity'], hue=df['labels'], palette='viridis')
+plt.title("Gaussian mixture model")
 plt.show()
