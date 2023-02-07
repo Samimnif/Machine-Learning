@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from scipy import stats
 
@@ -17,6 +18,20 @@ y = df.iloc[:, -1].values
 z = np.abs(stats.zscore(X))
 X = X[(z < 3).all(axis=1)]
 y = y[(z < 3).all(axis=1)]
+
+wcss = []
+for i in range(1,11):
+    kmeans = KMeans(n_clusters=i, init='k-means++', random_state=0)
+    kmeans.fit(X)
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1,11), wcss)
+plt.title('The Elbow Method')
+plt.xlabel('Number of Clusters')
+plt.ylabel('WCSS')
+plt.axvline(x=3, color='red', linestyle="--")
+plt.scatter(3, wcss[2],s=100, color="red", marker="o")
+plt.show()
+print('shown')
 
 # Perform PCA to visualize the data in 2D
 pca = PCA(n_components=2)
