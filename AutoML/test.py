@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.datasets import load_iris
 from scipy import stats
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 # Load the iris dataset
 iris = load_iris()
@@ -17,6 +19,17 @@ z_scores = stats.zscore(iris_df.iloc[:, :-1])
 abs_z_scores = np.abs(z_scores)
 filtered_entries = (abs_z_scores < 3).all(axis=1)
 iris_df = iris_df[filtered_entries]
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(iris_df.iloc[:, :-1], iris_df.iloc[:, -1],
+                                                    test_size=0.3, random_state=42)
+
+# Train a random forest classifier
+rfc = RandomForestClassifier(n_estimators=100, random_state=42)
+rfc.fit(X_train, y_train)
+
+# Predict the class of each iris in the testing set
+y_pred = rfc.predict(X_test)
 
 # Histogram of the original dataset
 fig, axs = plt.subplots(ncols=2, figsize=(10, 5))
@@ -43,4 +56,10 @@ plt.show()
 
 # Pairplot of the filtered dataset
 sns.pairplot(iris_df, hue='target')
+plt.show()
+
+# Plot the predicted class of each iris in the testing set
+fig, ax = plt.subplots()
+sns.scatterplot(data=X_test, x='sepal length (cm)', y='sepal width (cm)', hue=y_pred, ax=ax)
+ax.set_title('Predicted Class of Each Iris')
 plt.show()
