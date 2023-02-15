@@ -62,6 +62,38 @@ corr = iris_df.corr()
 sns.heatmap(corr, annot=True, cmap='coolwarm')
 plt.show()
 
+fig, ax = plt.subplots(figsize=(10,10))
+corr = iris_df.corr()
+mask = np.zeros_like(corr)
+mask[np.triu_indices_from(mask)] = True
+sns.heatmap(corr, annot=True, cmap='coolwarm', mask=mask, square=True, ax=ax)
+plt.show()
+
+#swarm plot
+fig, ax = plt.subplots()
+sns.swarmplot(data=iris_df.iloc[:,:-1], ax=ax)
+ax.set_title('Swarm Plot of Iris Data')
+plt.show()
+
+# pairplot with density plots instead of histograms
+fig = sns.pairplot(data=iris_df, hue='target', diag_kind='kde')
+fig.fig.suptitle('Pairplot with Density Plots', y=1.05)
+plt.show()
+
+#violin plot
+fig, ax = plt.subplots()
+sns.violinplot(data=iris_df.iloc[:,:-1], ax=ax)
+ax.set_title('Violin Plot of Iris Data')
+plt.show()
+
+#scatter plot
+fig = pd.plotting.scatter_matrix(iris_df.iloc[:,:-1], c=iris_df['target'], figsize=(10,10))
+fig[0,0].set_visible(False)  # Remove the overlapping density plot
+fig[-1,0].set_visible(False)  # Remove the overlapping density plot
+fig[-1,-1].set_visible(False)  # Remove the overlapping density plot
+plt.show()
+
+
 # Pairplot of the filtered dataset
 sns.pairplot(iris_df, hue='target')
 plt.show()
