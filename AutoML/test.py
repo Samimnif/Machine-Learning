@@ -20,6 +20,14 @@ abs_z_scores = np.abs(z_scores)
 filtered_entries = (abs_z_scores < 3).all(axis=1)
 iris_df = iris_df[filtered_entries]
 
+# Show a sample of the dataset
+print("Sample of the iris dataset:")
+print(iris_df.sample(10))
+
+# Histogram of all columns in the filtered dataset
+iris_df.hist(figsize=(10, 10))
+plt.show()
+
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(iris_df.iloc[:, :-1], iris_df.iloc[:, -1],
                                                     test_size=0.3, random_state=42)
