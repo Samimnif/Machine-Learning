@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import mpld3
 from sklearn.datasets import load_iris
 from scipy import stats
 from sklearn.ensemble import RandomForestClassifier
@@ -38,6 +39,14 @@ rfc.fit(X_train, y_train)
 
 # Predict the class of each iris in the testing set
 y_pred = rfc.predict(X_test)
+
+# Histogram of all columns
+fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(12, 8))
+for i, ax in enumerate(axs.flatten()):
+    sns.histplot(iris_df.iloc[:, i], kde=True, ax=ax)
+    ax.set_title(f'Histogram of {iris_df.columns[i]}')
+plt.tight_layout()
+mpld3.display()
 
 # Histogram of the original dataset
 fig, axs = plt.subplots(ncols=2, figsize=(10, 5))
