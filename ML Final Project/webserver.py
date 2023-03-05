@@ -11,11 +11,18 @@ app = Flask(__name__)
 # Define the home page
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("diabetes.html")
+@app.route("/diabetes")
+def diabetes():
+    return render_template("diabetes.html")
+
+@app.route("/cardio")
+def cardio():
+    return render_template("cardio.html")
 
 
 # Define the prediction page
-@app.route("/predict", methods=["POST"])
+@app.route("/predict_diabetes", methods=["POST"])
 def predict():
     # Get the input from the form
     Pregnancies = int(request.form["Pregnancies"])

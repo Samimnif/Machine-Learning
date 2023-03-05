@@ -20,4 +20,4 @@ accuracy = rfc.score(X_test, y_test)
 print("Accuracy:", accuracy)
 
 # Save the trained model as a pickle file
-pickle.dump(rfc, open("model.pkl", "wb"))
+pickle.dump(rfc, open("diabetes_model.pkl", "wb"))

@@ -2,7 +2,8 @@ import pickle
 import numpy as np
 
 # Load the trained model
-model = pickle.load(open("model.pkl", "rb"))
+diabetes = pickle.load(open("diabetes_model.pkl", "rb"))
+cardio = pickle.load(open("cardio_model.pkl", "rb"))
 
 
 # Define a function to make predictions
@@ -12,7 +13,18 @@ def predict_diabetes(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin
         [[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
 
     # Make the prediction
-    prediction = model.predict(input_data)
+    prediction = diabetes.predict(input_data)
+
+    # Return the prediction (0 or 1)
+    return prediction[0]
+
+# Define a function to make predictions
+def predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active):
+    # Convert the input to a numpy array
+    input_data = np.array([[age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active]])
+
+    # Make the prediction
+    prediction = cardio.predict(input_data)
 
     # Return the prediction (0 or 1)
     return prediction[0]
