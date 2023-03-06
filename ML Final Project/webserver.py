@@ -23,7 +23,7 @@ def cardio():
 
 # Define the prediction page
 @app.route("/predict_diabetes", methods=["POST"])
-def predict():
+def predict_diabetes():
     # Get the input from the form
     Pregnancies = int(request.form["Pregnancies"])
     Glucose = int(request.form["Glucose"])
@@ -37,6 +37,27 @@ def predict():
     # Make the prediction using the predict_diabetes function
     prediction = predict_diabetes(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI,
                                   DiabetesPedigreeFunction, Age)
+
+    # Return the prediction to the user
+    return render_template("predict.html", prediction=prediction)
+
+@app.route("/predict_cardio", methods=["POST"])
+def predict_cardio():
+    # Get the input from the form
+    gender = int(request.form["gender"])
+    height = int(request.form["height"])
+    weight = int(request.form["weight"])
+    ap_hi = int(request.form["ap_hi"])
+    ap_lo = int(request.form["ap_lo"])
+    cholesterol = float(request.form["cholesterol"])
+    gluc = float(request.form["gluc"])
+    smoke = float(request.form["smoke"])
+    active = float(request.form["active"]) #add this
+    alco = float(request.form["alco"]) #add this
+    age = int(request.form["age"])
+
+    # Make the prediction using the predict_diabetes function
+    predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active)
 
     # Return the prediction to the user
     return render_template("predict.html", prediction=prediction)

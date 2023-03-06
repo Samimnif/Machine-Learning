@@ -13,9 +13,9 @@
 
 	#regForm {
 		background: linear-gradient(217deg,
-				#FCD0A1,
-				#AFD2E9 70.71%), linear-gradient(127deg, #B1B695, #5E4B56 70.71%),
-			linear-gradient(336deg, #A690A4, rgba(0, 0, 255, 0) 70.71%);
+				#18206F,
+				#BD1E1E 60.71%), linear-gradient(127deg, #2E86AB, #D88373 60.71%),
+			linear-gradient(336deg, #F5E2C8, rgba(0, 0, 255, 0) 60.71%);
 		/*background-color: #ffffff;*/
 		margin: 100px auto;
 		font-family: Raleway;
@@ -57,6 +57,9 @@
 		font-family: Raleway;
 		cursor: pointer;
 	}
+	label{
+		color: white;
+	}
 
 	button:hover {
 		opacity: 0.8;
@@ -71,7 +74,7 @@
 		height: 15px;
 		width: 15px;
 		margin: 0 2px;
-		background-color: #bbbbbb;
+		background-color: #2FF6AB;
 		border: none;
 		border-radius: 50%;
 		display: inline-block;
@@ -84,7 +87,7 @@
 
 	/* Mark the steps that are finished and valid: */
 	.step.finish {
-		background-color: #5E4B56;
+		background-color: #2E86AB;
 	}
 
 	.genders {
@@ -113,36 +116,36 @@
 		<div class="tab">
 			<label for="gender">Gender:</label><br>
 			<div class="genders">
-				<input type="radio" id="gender1" name="gender">
+				<input type="radio" id="gender1" name="male">
 				<label>Male</label><br>
-				<input type="radio" id="gender" name="gender">
+				<input type="radio" id="gender" name="female">
 				<label>Female</label><br>
 			</div>
 			<br>
-			<label for="Pregnancies">Pregnancies:</label>
-			<input type="number" id="Pregnancies" name="Pregnancies" value="0" required><br><br>
-			<label for="Age">Age:</label>
-			<input type="number" id="Age" name="Age" required><br><br>
+			<label for="height">Height:</label>
+			<input type="number" id="height" name="height" required><br><br>
+			<label for="age">Age:</label>
+			<input type="number" id="age" name="age" required><br><br>
 		</div>
 		<div class="tab">
-			<label for="Glucose">Glucose:</label>
-			<input type="number" id="Glucose" name="Glucose" required><br><br>
+			<label for="weight">weight:</label>
+			<input type="number" id="weight" name="weight" required><br><br>
 
-			<label for="BloodPressure">Blood Pressure:</label>
-			<input type="number" id="BloodPressure" name="BloodPressure" required>mm Hg<br><br>
+			<label for="ap_hi">Systolic blood pressure:</label>
+			<input type="number" id="ap_hi" name="ap_hi" required>mm Hg<br><br>
 
-			<label for="Insulin">Insulin:</label>
-			<input type="number" id="Insulin" name="Insulin" required>mµ U/ml<br><br>
+			<label for="ap_lo">Diastolic blood pressure:</label>
+			<input type="number" id="ap_lo" name="ap_lo" required>mµ U/ml<br><br>
 		</div>
 		<div class="tab">
-			<label for="SkinThickness">Skin Thickness:</label>
-			<input type="number" id="SkinThickness" name="SkinThickness" required>mm<br><br>
+			<label for="cholesterol">cholesterol:</label>
+			<input type="number" id="cholesterol" name="cholesterol" required>mm<br><br>
 
-			<label for="BMI">BMI:</label>
-			<input type="number" step="0.01" id="BMI" name="BMI" required> kg/(height in m)<sup>2</sup><br><br>
+			<label for="gluc">Glucose :</label>
+			<input type="number" step="0.01" id="gluc" name="gluc" required> kg/(height in m)<sup>2</sup><br><br>
 
-			<label for="DiabetesPedigreeFunction">Have you or any family member diagnosed with diabetes:</label>
-			<input type="number" step="0.01" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction"
+			<label for="smoke">Smoking :</label>
+			<input type="number" step="0.01" id="smoke" name="smoke"
 				required><br><br>
 		</div>
 		<div style="overflow:auto;">
