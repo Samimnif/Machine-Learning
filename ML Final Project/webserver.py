@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import numpy as np
 
 # Load the predict_diabetes function
-from predict import predict_diabetes
+from predict import predict_diabetes , predict_cardiovascular_disease
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def cardio():
 
 # Define the prediction page
 @app.route("/predict_diabetes", methods=["POST"])
-def predict_diabetes():
+def predict_d():
     # Get the input from the form
     Pregnancies = int(request.form["Pregnancies"])
     Glucose = int(request.form["Glucose"])
@@ -42,7 +42,7 @@ def predict_diabetes():
     return render_template("predict.html", prediction=prediction)
 
 @app.route("/predict_cardio", methods=["POST"])
-def predict_cardio():
+def predict_c():
     # Get the input from the form
     gender = int(request.form["gender"])
     height = int(request.form["height"])

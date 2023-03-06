@@ -94,18 +94,6 @@
 		max-width: 200px;
 	}
 </style>
-<script>
-	$(document).ready(function () {
-		// When the page loads, hide all the forms
-		$("#Pregnancies").hide();
-
-		// When a radio button is clicked, hide all forms and show the selected one
-		$("input[type='radio']").click(function () {
-			$("#Pregnancies").hide();
-			$("#Pregnancies" + $(this).val()).show();
-		});
-	});
-</script>
 
 <body>
 
@@ -113,14 +101,16 @@
 		<div class="tab">
 			<label for="gender">Gender:</label><br>
 			<div class="genders">
-				<input type="radio" id="gender1" name="gender">
+				<input type="radio" id="male" name="gender" checked="checked" onchange="showHideDiv()">
 				<label>Male</label><br>
-				<input type="radio" id="gender" name="gender">
+				<input type="radio" id="female" name="gender" onchange="showHideDiv()">
 				<label>Female</label><br>
 			</div>
 			<br>
-			<label for="Pregnancies">Pregnancies:</label>
-			<input type="number" id="Pregnancies" name="Pregnancies" value="0" required><br><br>
+			<div id="PregnanciesDisplay" style="display: none;">
+				<label for="Pregnancies">Pregnancies:</label>
+				<input type="number" id="Pregnancies" name="Pregnancies" value="0" required><br><br>
+			</div>
 			<label for="Age">Age:</label>
 			<input type="number" id="Age" name="Age" required><br><br>
 		</div>
@@ -161,6 +151,17 @@
 	</form>
 
 	<script>
+		function showHideDiv() {
+			if (document.getElementById('male').checked) {
+				console.log('here');
+				document.getElementById('PregnanciesDisplay').style.display = "none";
+			} else if (document.getElementById('female').checked) {
+				console.log('here2');
+				document.getElementById('PregnanciesDisplay').style.display = "block";
+			}
+		}
+
+
 		var currentTab = 0; // Current tab is set to be the first tab (0)
 		showTab(currentTab); // Display the current tab
 

@@ -1,5 +1,7 @@
 import pickle
 import numpy as np
+#import ML_CardioModel
+#import ML_DiabetesModel
 
 # Load the trained model
 diabetes = pickle.load(open("diabetes_model.pkl", "rb"))
