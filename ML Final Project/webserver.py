@@ -39,28 +39,28 @@ def predict_d():
                                   DiabetesPedigreeFunction, Age)
 
     # Return the prediction to the user
-    return render_template("predict.html", prediction=prediction)
+    return render_template("predict.html", prediction=prediction[0], probability=prediction[1])
 
 @app.route("/predict_cardio", methods=["POST"])
 def predict_c():
     # Get the input from the form
-    gender = int(request.form["gender"])
+    gender = request.form.get("gender")
     height = int(request.form["height"])
     weight = int(request.form["weight"])
     ap_hi = int(request.form["ap_hi"])
     ap_lo = int(request.form["ap_lo"])
-    cholesterol = float(request.form["cholesterol"])
-    gluc = float(request.form["gluc"])
-    smoke = float(request.form["smoke"])
-    active = float(request.form["active"]) #add this
-    alco = float(request.form["alco"]) #add this
-    age = int(request.form["age"])
+    cholesterol = request.form.get("cholesterol")
+    gluc = request.form.get("gluc")
+    smoke = request.form.get("smoke")
+    active = request.form.get("active") #add this
+    alco = request.form.get("alco") #add this
+    age = int(request.form["age"]) * 365
 
     # Make the prediction using the predict_diabetes function
-    predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active)
+    prediction = predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active)
 
     # Return the prediction to the user
-    return render_template("predict.html", prediction=prediction)
+    return render_template("predict.html", prediction=prediction[0], probability=prediction[1])
 
 
 if __name__ == "__main__":

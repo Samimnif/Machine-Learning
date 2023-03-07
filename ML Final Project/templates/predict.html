@@ -6,10 +6,11 @@
 <body>
 	<h1>Diabetes Detection</h1>
 	{% if prediction == 1 %}
-	<p>The patient is predicted to have diabetes.</p>
+	<p>The patient is predicted to have diabetes with a {{probability*100}}% probability.</p>
 	{% else %}
 	<p>The patient is predicted to not have diabetes.</p>
 	{% endif %}
+
 	<a href="/">Go back to home page</a>
 </body>
 </html>

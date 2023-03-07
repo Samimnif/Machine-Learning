@@ -16,9 +16,10 @@ def predict_diabetes(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin
 
     # Make the prediction
     prediction = diabetes.predict(input_data)
+    probability = diabetes.predict_proba(input_data)[0][1]
 
     # Return the prediction (0 or 1)
-    return prediction[0]
+    return prediction[0], probability
 
 # Define a function to make predictions
 def predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active):
@@ -27,6 +28,7 @@ def predict_cardiovascular_disease(age, gender, height, weight, ap_hi, ap_lo, ch
 
     # Make the prediction
     prediction = cardio.predict(input_data)
+    probability = cardio.predict_proba(input_data)[0][1]
 
     # Return the prediction (0 or 1)
-    return prediction[0]
+    return prediction[0], probability
