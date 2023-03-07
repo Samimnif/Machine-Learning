@@ -39,7 +39,7 @@ def predict_d():
                                   DiabetesPedigreeFunction, Age)
 
     # Return the prediction to the user
-    return render_template("predict.html", prediction=prediction[0], probability=prediction[1])
+    return render_template("predict.html", prediction=prediction[0], probability=prediction[1]*100)
 
 @app.route("/predict_cardio", methods=["POST"])
 def predict_c():
