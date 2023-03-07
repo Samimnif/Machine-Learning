@@ -2,6 +2,9 @@
 <html>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Percentage Circle</title>
 	<style type="text/css">
 		.flex-wrapper {
@@ -131,23 +134,23 @@
 	</div>
 
 	<center>
-	<h1>Diabetes Detection</h1>
-	{% if prediction == 1 %}
-	<p>The patient is predicted to have diabetes with a {{probability}}% probability.</p>
-	<div class="single-chart">
-		<svg viewBox="0 0 36 36" class="circular-chart blue">
-			<path class="circle-bg" d="M18 2.0845
+		<h1>Diabetes Detection</h1>
+		{% if prediction == 1 %}
+		<p>The patient is predicted to have diabetes with a {{probability}}% probability.</p>
+		<div class="single-chart">
+			<svg viewBox="0 0 36 36" class="circular-chart blue">
+				<path class="circle-bg" d="M18 2.0845
 			  a 15.9155 15.9155 0 0 1 0 31.831
 			  a 15.9155 15.9155 0 0 1 0 -31.831" />
-			<path class="circle" stroke-dasharray="{{probability}}, 100" d="M18 2.0845
+				<path class="circle" stroke-dasharray="{{probability}}, 100" d="M18 2.0845
 			  a 15.9155 15.9155 0 0 1 0 31.831
 			  a 15.9155 15.9155 0 0 1 0 -31.831" />
-			<text x="18" y="20.35" class="percentage">{{probability}}%</text>
-		</svg>
-		{% else %}
-		<p>The patient is predicted to not have diabetes.</p>
-		{% endif %}
-		<br><br>
+				<text x="18" y="20.35" class="percentage">{{probability}}%</text>
+			</svg>
+			{% else %}
+			<p>The patient is predicted to not have diabetes.</p>
+			{% endif %}
+			<br><br>
 	</center>
 </body>
 
