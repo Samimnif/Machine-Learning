@@ -1,3 +1,6 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pickle
 import numpy as np
 #import ML_CardioModel
@@ -6,7 +9,6 @@ import numpy as np
 # Load the trained model
 diabetes = pickle.load(open("diabetes_model.pkl", "rb"))
 cardio = pickle.load(open("cardio_model.pkl", "rb"))
-
 
 # Define a function to make predictions
 def predict_diabetes(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age):
