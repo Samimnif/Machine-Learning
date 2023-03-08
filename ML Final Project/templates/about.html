@@ -93,8 +93,8 @@
         <h1>Overview:</h1>
         <p>This webserver uses Machine Learning concepts to help people predict if they have diabetes or cardiovascular
             disease</p>
-        <h2>Dataset:</h2>
-        <h4>Diabetes:</h4>
+        <h2>i. Dataset:</h2>
+        <h4><u>Diabetes:</u></h4>
         <pre>
              Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  DiabetesPedigreeFunction  Age  Outcome
         149            2       90             70             17        0  27.3                     0.085   22        0
@@ -103,7 +103,7 @@
         375           12      140             82             43      325  39.2                     0.528   58        1
         401            6      137             61              0        0  24.2                     0.151   55        0
     </pre>
-        <h4>Cardiovascular:</h4>
+        <h4><u>Cardiovascular:</u></h4>
         <pre>
                   id    age  gender  height  weight  ap_hi  ap_lo  cholesterol  gluc  smoke  alco  active  cardio
         8450   12061  21047       2     165    84.0    140     80            1     1      0     0       1       1
@@ -112,7 +112,7 @@
         2833    3989  16094       2     175    58.0    100     80            1     1      1     0       1       0
         13406  19137  21196       1     158    94.0    130     80            1     1      0     0       0       0
     </pre>
-        <h2>Tools used:</h2>
+        <h2>ii. Tools used:</h2>
         <p>This project uses the Flask framework to run the the webserver.</p>
         <p>
             For the Machine Learning I used multiple libraries for both the cardiovascular dataset and the diabetes
@@ -135,15 +135,17 @@
         import numpy as np
     </pre>
     <h1>Structure:</h1>
+    <img src="{{ url_for('static', filename='images/dir.png') }}" alt="Structure"><br>
+    <img src="{{ url_for('static', filename='images/structure.png') }}" alt="Structure Drawing" style="width: 1500px;"><br>
     <h1>Analysis:</h1>
-    <h2>Diabetes:</h2>
+    <h2>i. Diabetes:</h2>
     <img src="{{ url_for('static', filename='images/diabetes_feature.png') }}" alt="Diabetes Feature" style="width: 1000px;"><br>
     <img src="{{ url_for('static', filename='images/diabetes_boxplot.png') }}" alt="Diabetes Boxplot"><br>
     <img src="{{ url_for('static', filename='images/diabetes_confusion.png') }}" alt="Diabetes Confusion" style="width: 500px;"><br>
     <img src="{{ url_for('static', filename='images/diabetes_density.png') }}" alt="Diabetes Density"><br>
     <img src="{{ url_for('static', filename='images/diabetes_histogram.png') }}" alt="Diabetes Histogram"><br>
 
-    <h2>Cardiovascular:</h2>
+    <h2>ii. Cardiovascular:</h2>
     <img src="{{ url_for('static', filename='images/cardio_gaussian.png') }}" alt="Cardio gaussian" ><br>
     <img src="{{ url_for('static', filename='images/cardio_boxplot.png') }}" alt="Cardio Boxplot"><br>
     <img src="{{ url_for('static', filename='images/cardio_heatmap.png') }}" alt="Cardio heatmap" style="width: 700px;"><br>
