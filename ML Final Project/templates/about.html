@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background: linear-gradient(217deg,
+                    #FE5D26,
+                    #7EBC89 60.71%), linear-gradient(127deg, #F2C078, #C1DBB3 60.71%),
+                linear-gradient(336deg, #FAEDCA, rgba(0, 0, 255, 0) 60.71%);
+            color: white;
+        }
+
+        .topnav .icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav a:not(:first-child) {
+                display: none;
+            }
+
+            .topnav a.icon {
+                float: right;
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav.responsive {
+                position: relative;
+            }
+
+            .topnav.responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .topnav.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topnav" id="myTopnav">
+        <a href="/" ><i class="bi bi-house" style="padding-right: 5px;"></i>Home</a>
+        <a href="/cardio"><i class="bi bi-activity" style="padding-right: 5px;"></i>Cardio</a>
+        <a href="/diabetes"><i class="bi bi-capsule-pill" style="padding-right: 5px;"></i>Diabetes</a>
+        <a href="/about" class="active"><i class="bi bi-info-circle" style="padding-right: 5px;"></i>About</a>
+        <a href="javascript:void(0);" class="icon" onclick="hamburg()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div style="padding-left:16px">
+        <h1>Overview:</h1>
+        <p>This webserver uses Machine Learning concepts to help people predict if they have diabetes or cardiovascular
+            disease</p>
+        <h2>Dataset:</h2>
+        <h4>Diabetes:</h4>
+        <pre>
+             Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  DiabetesPedigreeFunction  Age  Outcome
+        149            2       90             70             17        0  27.3                     0.085   22        0
+        733            2      106             56             27      165  29.0                     0.426   22        0
+        636            5      104             74              0        0  28.8                     0.153   48        0
+        375           12      140             82             43      325  39.2                     0.528   58        1
+        401            6      137             61              0        0  24.2                     0.151   55        0
+    </pre>
+        <h4>Cardiovascular:</h4>
+        <pre>
+                  id    age  gender  height  weight  ap_hi  ap_lo  cholesterol  gluc  smoke  alco  active  cardio
+        8450   12061  21047       2     165    84.0    140     80            1     1      0     0       1       1
+        7612   10863  21893       1     163    90.0    100     70            1     2      0     0       1       0
+        48634  69448  17467       1     160    66.0     90     60            1     1      0     0       1       1
+        2833    3989  16094       2     175    58.0    100     80            1     1      1     0       1       0
+        13406  19137  21196       1     158    94.0    130     80            1     1      0     0       0       0
+    </pre>
+        <h2>Tools used:</h2>
+        <p>This project uses the Flask framework to run the the webserver.</p>
+        <p>
+            For the Machine Learning I used multiple libraries for both the cardiovascular dataset and the diabetes
+            dataset <br>
+            that loads the csv files and train the models and then save it in a .pkl file for later use by other
+            scripts.
+        </p>
+        <pre>
+        import pandas as pd
+        from sklearn.ensemble import RandomForestClassifier
+        from sklearn.model_selection import train_test_split
+        from sklearn.model_selection import train_test_split
+        from sklearn.ensemble import RandomForestClassifier
+        from sklearn.metrics import roc_curve, auc
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        import pickle
+
+        from flask import Flask, render_template, request
+        import numpy as np
+    </pre>
+    <h1>Structure:</h1>
+    <h1>Analysis:</h1>
+    <h2>Diabetes:</h2>
+    <img src="{{ url_for('static', filename='images/diabetes_feature.png') }}" alt="Diabetes Feature" style="width: 1000px;"><br>
+    <img src="{{ url_for('static', filename='images/diabetes_boxplot.png') }}" alt="Diabetes Boxplot"><br>
+    <img src="{{ url_for('static', filename='images/diabetes_confusion.png') }}" alt="Diabetes Confusion" style="width: 500px;"><br>
+    <img src="{{ url_for('static', filename='images/diabetes_density.png') }}" alt="Diabetes Density"><br>
+    <img src="{{ url_for('static', filename='images/diabetes_histogram.png') }}" alt="Diabetes Histogram"><br>
+
+    <h2>Cardiovascular:</h2>
+    <img src="{{ url_for('static', filename='images/cardio_gaussian.png') }}" alt="Cardio gaussian" ><br>
+    <img src="{{ url_for('static', filename='images/cardio_boxplot.png') }}" alt="Cardio Boxplot"><br>
+    <img src="{{ url_for('static', filename='images/cardio_heatmap.png') }}" alt="Cardio heatmap" style="width: 700px;"><br>
+    <img src="{{ url_for('static', filename='images/cardio_scatter.png') }}" alt="Cardio scatter"><br>
+    <img src="{{ url_for('static', filename='images/cardio_histogram.png') }}" alt="Cardio Histogram"><br>
+    <img src="{{ url_for('static', filename='images/cardio_barplot.png') }}" alt="Cardio barplot"><br>
+    <img src="{{ url_for('static', filename='images/cardio_AUC-ROC.png') }}" alt="Cardio AUC-ROC"><br>
+    <img src="{{ url_for('static', filename='images/cardio_pairplot.png') }}" alt="Cardio pairplot" style="width: 1000px;"><br>
+
+    </div>
+    <script>
+        function hamburg() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

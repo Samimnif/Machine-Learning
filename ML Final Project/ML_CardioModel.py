@@ -28,6 +28,7 @@ print(f"Accuracy: {accuracy}")
 pickle.dump(rfc, open("cardio_model.pkl", "wb"))
 
 if __name__ == "__main__":
+    print(df.sample(5))
     # Plot a histogram of the age distribution
     plt.hist(df['age'], bins=20)
     plt.title("Age Distribution")

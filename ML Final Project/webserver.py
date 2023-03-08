@@ -63,6 +63,9 @@ def predict_c():
     # Return the prediction to the user
     return render_template("cardio_predict.html", prediction=prediction[0], probability=prediction[1]*100)
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -25,6 +25,7 @@ print("Accuracy:", accuracy)
 pickle.dump(rfc, open("diabetes_model.pkl", "wb"))
 
 if __name__ == "__main__":
+    print(data.sample(5))
     # Plot feature importance
     feat_importances = pd.Series(rfc.feature_importances_, index=X.columns)
     feat_importances.nlargest(10).plot(kind='barh')
