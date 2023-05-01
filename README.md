@@ -13,3 +13,7 @@ _**Supervised** learning_ will include two experiments which are Regression and 
 [Clustering](https://github.com/Samimnif/Machine-Learning/tree/master/Unsupervised#clustering)
 <br>
 [Anamoly](https://github.com/Samimnif/Machine-Learning/tree/master/Unsupervised#anamoly)
+### AutoML
+[AutoMl](https://github.com/Samimnif/Machine-Learning/tree/master/AutoML#automl)
+### ML Final Project
+[Home Clinic Webserver]()
